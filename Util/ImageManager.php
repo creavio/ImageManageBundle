@@ -116,6 +116,7 @@ class ImageManager
 				throw new \Exception('Image type is not supported');
 		}
 
+
 		return $outputName;
 	}
 
