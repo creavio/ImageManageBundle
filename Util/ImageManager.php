@@ -5,6 +5,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ImageManager
 {
+	const WEB_FOLDER = 'thumbs';
 	/**
 	 * @var ContainerInterface
 	 */
@@ -28,7 +29,7 @@ class ImageManager
 	 */
 	public function resize($type, $file, $width = 0, $height = 0)
 	{
-		$file = $this->container->get('kernel')->getRootDir() . '/../web' . $file;
+		$file = $this->container->get('kernel')->getRootDir() . '/../web' . $this->fileCleanUp($file);
 
 		list($outputName, $output) = $this->generateNewFileName($file, $type, $width, $height);
 
@@ -101,6 +102,12 @@ class ImageManager
 		// Generate resized file
 		imagecopyresampled($imageResized, $image, 0, 0, 0, 0, $finalWidth, $finalHeight, $originalWidth, $originalHeight);
 
+		// Check if web folder exists if not create it
+		$completeFolder = $this->container->get('kernel')->getRootDir() . '/../web/' . self::WEB_FOLDER;
+		if(!is_dir($completeFolder)) {
+			mkdir($completeFolder, 0755);
+		}
+
 
 		switch($imageType) {
 			case IMAGETYPE_GIF:
@@ -168,9 +175,18 @@ class ImageManager
 	{
 		$pathParts = pathinfo($originalFile);
 
-		$newName = '/thumbs/' . $pathParts['filename'] . '-' . $type . '-' . $width . 'x' . $height . '.' . $pathParts['extension'];
+		$newName = '/'. self::WEB_FOLDER .'/' . $pathParts['filename'] . '-' . $type . '-' . $width . 'x' . $height . '.' . $pathParts['extension'];
 		$newPath = $this->container->get('kernel')->getRootDir() . '/../web' . $newName;
 
 		return [$newName, $newPath];
+	}
+
+	/**
+	 * @param string $file
+	 * @return string
+     */
+	private function fileCleanUp($file)
+	{
+		return ($file[0] == '/') ? $file : '/' . $file;
 	}
 }
