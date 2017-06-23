@@ -175,8 +175,8 @@ class ImageManager
 	{
 		$pathParts = pathinfo($originalFile);
 
-		$newName = '/'. self::WEB_FOLDER .'/' . $pathParts['filename'] . '-' . $type . '-' . $width . 'x' . $height . '.' . $pathParts['extension'];
-		$newPath = $this->container->get('kernel')->getRootDir() . '/../web' . $newName;
+		$newName = self::WEB_FOLDER .'/' . $pathParts['filename'] . '-' . $type . '-' . $width . 'x' . $height . '.' . $pathParts['extension'];
+		$newPath = $this->container->get('kernel')->getRootDir() . '/../web/' . $newName;
 
 		return [$newName, $newPath];
 	}
