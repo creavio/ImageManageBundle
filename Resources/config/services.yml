@@ -1,9 +1,11 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     creavio.image_manager:
         class: Creavio\ImageManageBundle\Util\ImageManager
-        arguments: ["@service_container"]
+    Creavio\ImageManageBundle\Util\ImageManager: '@creavio.image_manager'
 
-    creavio.twig.image_manage_extension:
-        class: Creavio\ImageManageBundle\Twig\Extension\ImageManageExtension
-        arguments: ["@service_container"]
+    Creavio\ImageManageBundle\Twig\Extension\ImageManageExtension:
         tags: [{ name: twig.extension }]
