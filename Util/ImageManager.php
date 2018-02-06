@@ -102,7 +102,7 @@ class ImageManager
 		[$originalWidth, $originalHeight, $imageType, $image] = $this->createImage($file);
 		$imageResized = $this->getResizeImage($width, $height, $image, $imageType);
 
-		[$finalWidth, $finalHeight] = $this->getProportionalSize($width, $height, $originalWidth, $originalHeight);
+		[$finalWidth, $finalHeight] = $this->getProportionalSize(max([$width, $height]), max([$width, $height]), $originalWidth, $originalHeight);
 
 		$finalWidth = $finalWidth * $scale;
 		$finalHeight = $finalHeight * $scale;
