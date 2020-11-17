@@ -3,7 +3,7 @@
 namespace Creavio\ImageManageBundle\Util;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class ImageManager
 {

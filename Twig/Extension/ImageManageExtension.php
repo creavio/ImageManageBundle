@@ -4,7 +4,7 @@ namespace Creavio\ImageManageBundle\Twig\Extension;
 
 use Creavio\ImageManageBundle\Util\ImageManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class ImageManageExtension extends \Twig_Extension
 {
